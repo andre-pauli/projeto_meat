@@ -3,7 +3,7 @@
     <p class="lead">Itens do Pedido:</p>
   </div>
 
-  <div class="col-xs-12 text-center" *ngIf="!items.length">
+  <div class="col-xs-12" *ngIf="!items.length">
     <p>Não há itens no seu carrinho, que tal começar por <a [routerLink]="['/restaurants']"> aqui</a></p>
   </div>
 
@@ -33,6 +33,7 @@
             <a (click)="emitRemove(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
           </td>
         </tr>
+        <a [routerLink]="['/restaurants']">Adicionar Itens</a>
       </tbody>
     </table>
   </div>
