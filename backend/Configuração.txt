@@ -1,0 +1,3 @@
+Para converter sempre um arquivo de ts para js utilizamos o comando abaixo:
+tsc -w
+ele fica ouvindo o arquivo TS e converte para JS de acordo com as configurações applicadas no arquivo tsconfig.json

@@ -4,7 +4,7 @@ import { CartItem } from "app/restaurant-detail/shopping-cart/cart-item.model";
 import { Observable } from "rxjs/Observable";
 import { Order, OrderItem } from "./order.model";
 import 'rxjs/add/operator/map'
-import { Http, Headers, RequestOptions } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
 import { MEAT_API } from 'app/app.api'
 
@@ -12,7 +12,7 @@ import { MEAT_API } from 'app/app.api'
 export class OrderService {
 
 
-    constructor(private cartService: ShoppingCartService, private http: Http) { }
+    constructor(private cartService: ShoppingCartService, private http: HttpClient) { }
 
     cartItems(): CartItem[] {
         return this.cartService.items
@@ -32,13 +32,7 @@ export class OrderService {
         return this.cartService.total()
     }
     checkOrder(order: Order): Observable<string> {
-        // CRIA UMA VARIÁVEL QUE RECEBE O HEADER QUE O PROTOCOLO HTTP EXIGE NA PASSAGEM POR POST
-        const headers = new Headers()
-        //ADICIONA O TIPO QUE O BACK-END IRÁ RECEBER QUE NESTE CASO É UM JSON
-        headers.append('Content-type', 'application/json')
-        return this.http.post(`${MEAT_API}/orders`, JSON.stringify(order),
-            new RequestOptions({ headers: headers }))
-            .map(response => response.json())
+        return this.http.post<Order>(`${MEAT_API}/orders`, order)
             .map(order => order.id)
     }
 

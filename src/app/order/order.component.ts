@@ -31,6 +31,7 @@ export class OrderComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder) { }
 
+
   ngOnInit() {
     this.orderForm = this.formBuilder.group({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
@@ -41,6 +42,7 @@ export class OrderComponent implements OnInit {
       complement: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required])
     }, { validator: OrderComponent.esqualsTo })
+
   }
 
   static esqualsTo(group: AbstractControl): { [key: string]: boolean } {
