@@ -3,6 +3,8 @@ import { Express } from 'express'
 import * as fs from 'fs'
 import * as https from 'https'
 
+import { handleAuthentication } from './auth'
+
 const port = 3001;
 
 const server: Express = jsonServer.create()
@@ -14,10 +16,7 @@ server.use(middlewares)
 
 server.use(jsonServer.bodyParser)
 
-server.post('/login', (req, resp) => {
-    resp.json({ message: 'ok' })
-})
-
+server.post('/login', handleAuthentication)
 server.use(router)
 
 const options = {
