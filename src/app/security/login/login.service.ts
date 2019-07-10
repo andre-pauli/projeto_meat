@@ -20,12 +20,17 @@ export class LoginService {
     }
 
     login(email: string, password: string): Observable<User> {
-        return this.http.post<User>(`${MEAT_API}/login`, { email: email, password: password })
+        return this.http.post<User>(`${MEAT_API}/login`,
+            { email: email, password: password })
             .do(user => this.user = user)
     }
 
-    handleLogin() {
-        this.router.navigate(['/login'])
+    handleLogin(path?: string) {
+        this.router.navigate(['/login', btoa(path)])
+    }
+
+    logout() {
+        this.user = undefined
     }
 
 }

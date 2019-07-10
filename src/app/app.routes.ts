@@ -11,6 +11,7 @@ import { LoggedInGuard } from "./security/login/loggedin.guard";
 
 export const ROUTES: Routes = [
     { path: '', component: HomeComponent },
+    { path: 'login/:to', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: 'restaurants', component: RestaurantsComponent },
@@ -24,7 +25,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'order', loadChildren: './order/order.module#OrderModule',
-        canLoad: [LoggedInGuard]
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]
     },
     { path: 'order-summary', component: OrderSummaryComponent },
     //A ROTA ABAIXO INDICA QUE NÃO FOI ENCONTRADO NENHUMA DAS ROTAS ACIMA, CHAMADA DE WILDCARD (CORINGA)
